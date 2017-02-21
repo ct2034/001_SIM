@@ -9,7 +9,7 @@ class Station(object):
         self.pos = pos;
         self.__is_blocked = False;
 
-        print("Station "+name+" mit ID "+id+" wurde erstellt.");
+        print("Station "+name+" wurde erstellt.");
 
     def process_Product(self, wait_time=1):
         self.__is_blocked = True; # blocked till process is done
@@ -26,7 +26,7 @@ class Station(object):
         return self.pos;
 
     def get_name(self):
-        return  self.name;
+        return self.name;
 
 
 
