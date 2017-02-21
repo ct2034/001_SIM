@@ -23,6 +23,7 @@ class Product(object):
         self.thread.start();
         self.thread.join();
 
+
     def __start_lifecycle(self):
         # als Eigenen Thread starten
         self.t_life = clock();
@@ -36,7 +37,6 @@ class Product(object):
                 else:
                     self.transport_to_next_station()
                     self.process_Product();
-
 
         self.t_end = clock();
         print("Product Nr. ",self.n_id,"is finished")
