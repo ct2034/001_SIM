@@ -4,11 +4,10 @@ from time import sleep
 
 class Station(object):
 
-    def __init__(self, name="Lager", pos=[0,0], is_blocked=False, id=0):
+    def __init__(self, name="Lager", pos=[0,0]):
         self.name = name;
         self.pos = pos;
-        self.__is_blocked = is_blocked;
-        self.id = id;
+        self.__is_blocked = False;
 
         print("Station "+name+" mit ID "+id+" wurde erstellt.");
 
@@ -22,6 +21,12 @@ class Station(object):
 
     def is_free(self):
         return self.__is_blocked;
+
+    def get_pos(self):
+        return self.pos;
+
+    def get_name(self):
+        return  self.name;
 
 
 
