@@ -8,7 +8,7 @@ from numpy import linalg as LA
 import numpy as np
 
 #stations = ["name", [x,y]];
-#tes
+#te
 stations = [["Lager",    np.array([0,0])],
             ["Station1", np.array([0,2])],
             ["Station2", np.array([3,0])],
