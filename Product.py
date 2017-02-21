@@ -1,5 +1,5 @@
 from time import clock
-import _thread
+import threading
 
 from Station import Station
 from numpy import linalg as LA
@@ -15,13 +15,13 @@ class Product(object):
         self.flow = flow
         self.is_finished = False
         self.t_birth = clock()
-        print("Product was created")
-        print("stations: ",self.stations.__len__());
-        print("flows: ", self.flow.__len__());
+        print("Product ",n_id," was created")
+        self.thread = threading.Thread(self.__start_lifecycle());
 
     def start_lifecycle(self):
         #runs lifecycle as Thread
-        _thread.start_new_thread(self.__start_lifecycle(), ());
+        self.thread.start();
+        self.thread.join();
 
     def __start_lifecycle(self):
         # als Eigenen Thread starten
@@ -43,13 +43,11 @@ class Product(object):
 
     def process_Product(self):
         is_processed = False;
-        print("Ausgabe flow:",self.flow);
         current_flow = self.flow[self.get_flow_index()];
-        print("Ausgabe current_Flow:",current_flow);
         process_time = current_flow[1];  # Zeit des Prozesschrittes aus Liste
+        source_Station = self.stations.__getitem__(self.flow[self.get_flow_index()][0])
 
         while(is_processed == False):
-            source_Station = self.stations[self.flow[self.get_flow_index()]];
             if (source_Station.is_free()):
                 source_Station.process_Product(process_time);
                 is_processed=True;
@@ -60,10 +58,6 @@ class Product(object):
         #Transportiere von Source nach Destination
         #flow = [stat, time]
         #Ermittle Station aus Flow List
-        print("flow",self.flow);
-        print("stations", self.stations);
-        print("test",self.flow[self.get_flow_index()][0]);
-        print("stat 0",self.stations[0][0].get_name());
 
         source_Station = self.stations.__getitem__(self.flow[self.get_flow_index()][0]);
         dest_Station = self.stations.__getitem__(self.flow[self.get_next_flow_index()][0]);
@@ -84,15 +78,15 @@ class Product(object):
         return self.is_finished;
 
     def get_flow_index(self):
-        print(self.flow_index);
+        #print("index",self.flow_index);
         return self.flow_index;
 
     def get_next_flow_index(self):
-        if (self.flow.__len__()-1 >= self.flow_index):
+        if (self.flow_index >= self.flow.__len__()-1 ):
             return self.flow_index;
         else:
             return self.flow_index + 1;
 
     def increment_flow_index(self):
-        if (self.flow.__len__() -1 < self.flow_index):
+        if (self.flow_index < self.flow.__len__() -1):
             self.flow_index+=1;

@@ -4,7 +4,7 @@ from time import sleep
 
 class Station(object):
 
-    def __init__(self, name="Lager", pos=[0,0]):
+    def __init__(self, name="Stat0", pos=[0,0]):
         self.name = name;
         self.pos = pos;
         self.__is_blocked = False;
@@ -20,7 +20,7 @@ class Station(object):
         self.__is_blocked = False; # next Package is allowed
 
     def is_free(self):
-        return self.__is_blocked;
+        return (not self.__is_blocked);
 
     def get_pos(self):
         return self.pos;

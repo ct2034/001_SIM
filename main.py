@@ -12,14 +12,14 @@ import numpy as np
 
 
 class Transport_Handler(object):
-    stations = [Station()];
+    stations = [Station];
     flow = [0,0];
 
     def __init__(self, n_products=10):
         self.n_products = n_products;
         self.lade_Listen();
 
-    def start(self,n=1):
+    def start(self,n=10):
         print("Simulation startet:")
         t_start = clock()
         product_list = [Product]
@@ -38,14 +38,14 @@ class Transport_Handler(object):
         if (False):
             pass
         else:
-            self.stations = [[Station("Lager",[0,0])],
-                        [Station("Trennen",[0,2])],
-                        [Station("Bohren",[2,0])],
-                        [Station("Fuegen",[5,2])],
-                        [Station("Schweißen",[7,3])],
-                        [Station("Polieren",[5,4])],
-                        [Station("Ausgang",[6,6])],
-                        ];
+            self.stations = [Station("Lager",[0,0]),
+                            Station("Trennen",[0,2]),
+                            Station("Bohren",[2,0]),
+                            Station("Fuegen",[5,2]),
+                            Station("Schweißen",[7,3]),
+                            Station("Polieren",[5,4]),
+                            Station("Ausgang",[6,6]),
+                            ];
             self.flow = [[0, 2],
                     [4, 3],
                     [3, 1],
