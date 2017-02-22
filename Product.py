@@ -31,7 +31,6 @@ class Product(object):
         self.t_life = clock();
         # do flow here
         for i in range(0,self.flow.__len__()-1):
-                print("i ist: ",i)
                 if (i >= self.flow.__len__()-2):
                     #Produkt fährt zum Ausgang
                     self.transport_to_next_station()

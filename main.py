@@ -30,7 +30,7 @@ class Transport_Handler(object):
             #self.product_list.append(t);
         sleep(0.1*n);
 
-        print("Product :",self.product_list)
+        #print("Product :",self.product_list)
         are_products_finished = False;
         while (are_products_finished == False):
             is_done=True;
@@ -76,7 +76,7 @@ class Transport_Handler(object):
 ## Main
 def run():
     start_object = Transport_Handler();
-    start_object.start(10000); # Anzahl der zu fertigenden Produkte
+    start_object.start(100); # Anzahl der zu fertigenden Produkte
 
 
 run();
