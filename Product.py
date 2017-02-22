@@ -33,14 +33,14 @@ class Product(object):
         self.t_life = clock();
         # do flow here
         for i in range(0,self.flow.__len__()):
-                if (i >= self.flow.__len__()-1):
+                if (i >= self.flow.__len__()-2):
                     #Produkt fährt zum Ausgang
-                    self.transport_to_next_station();
-                    self.__is_finished = True;
+                    self.transport_to_next_station()
+                    self.__is_finished = True
                     print("Product Nr. ", self.n_id, "is finished")
                 else:
                     self.transport_to_next_station()
-                    self.process_Product();
+                    self.process_Product()
 
         self.t_end = clock();
 
