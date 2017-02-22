@@ -57,18 +57,19 @@ class Transport_Handler(object):
             pass
         else:
             self.stations = [Station("Lager",[0,0]),
-                            Station("Trennen",[0,2]),
-                            Station("Bohren",[2,0]),
-                            Station("Fuegen",[5,2]),
-                            Station("Schweißen",[7,3]),
+                            Station("Trennen",[0,1]),
+                            Station("Bohren",[1,0]),
+                            Station("Fuegen",[3,2]),
+                            Station("Schweißen",[6,3]),
                             Station("Polieren",[5,4]),
                             Station("Ausgang",[6,6]),
                             ];
             self.flow = [[0, 2],
-                        [4, 3],
-                        [3, 1],
-                        [2, 4],
-                        [1, 5],
+                        [1, 3],
+                        [2, 1],
+                        [4, 4],
+                        [3, 3],
+                        [5, 3],
                         [6, 2]
                          ];
             print("Keine XML gefunden, lade Ersatzwerte",self.flow)
