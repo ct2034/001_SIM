@@ -48,7 +48,7 @@ class Transport_Handler(object):
 
     def register_products(self,prod=Product):
         self.product_list.append(prod);
-        print("Product was added, size:",self.product_list.__len__());
+        #print("Product was added, size:",self.product_list.__len__());
 
     def lade_Listen(self):
         # Import Stations, flow and Products from XML
@@ -76,7 +76,7 @@ class Transport_Handler(object):
 ## Main
 def run():
     start_object = Transport_Handler();
-    start_object.start(10); # Anzahl der zu fertigenden Produkte
+    start_object.start(10000); # Anzahl der zu fertigenden Produkte
 
 
 run();
