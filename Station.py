@@ -3,33 +3,26 @@ from time import sleep
 
 
 class Station(object):
+    def __init__(self, name="Stat0", pos=[0, 0]):
+        self.name = name
+        self.pos = pos
+        self.__is_blocked = False
 
-    def __init__(self, name="Stat0", pos=[0,0]):
-        self.name = name;
-        self.pos = pos;
-        self.__is_blocked = False;
-
-        print("Station "+name+" wurde erstellt.");
+        print("Station " + name + " wurde erstellt.")
 
     def process_Product(self, wait_time=1):
-        self.__is_blocked = True; # blocked till process is done
+        self.__is_blocked = True  # blocked till process is done
         if (wait_time > 360):
-            print("WARNING: Wait time is higher than 360 seconds. wait_time: ",wait_time)
+            print("WARNING: Wait time is higher than 360 seconds. wait_time: ", wait_time)
         if (wait_time > 0):
-            sleep(wait_time);
-        self.__is_blocked = False; # next Package is allowed
+            sleep(wait_time)
+        self.__is_blocked = False  # next Package is allowed
 
     def is_free(self):
-        return (not self.__is_blocked);
+        return (not self.__is_blocked)
 
     def get_pos(self):
-        return self.pos;
+        return self.pos
 
     def get_name(self):
-        return self.name;
-
-
-
-
-
-
+        return self.name
