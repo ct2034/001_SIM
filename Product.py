@@ -8,14 +8,16 @@ from time import sleep
 class Product(object):
 
 
-    def __init__(self, stations=[Station], flow=[], n_id=0):
+    def __init__(self, my_dad, stations=[Station], flow=[], n_id=0):
+        self.my_dad=my_dad;
         self.n_id = n_id
         self.stations = stations
         self.flow_index = 0
         self.flow = flow
-        self.is_finished = False
+        self.__is_finished = False
         self.t_birth = clock()
         print("Product ",n_id," was created")
+        my_dad.register_products(self);
         #self.__start_lifecycle();
         self.thread = threading.Thread(self.__start_lifecycle());
 
@@ -34,7 +36,7 @@ class Product(object):
                 if (i >= self.flow.__len__()-1):
                     #Produkt fährt zum Ausgang
                     self.transport_to_next_station();
-                    self.is_finished = True;
+                    self.__is_finished = True;
                     print("Product Nr. ", self.n_id, "is finished")
                 else:
                     self.transport_to_next_station()
@@ -53,6 +55,9 @@ class Product(object):
                 source_Station.process_Product(process_time);
                 is_processed=True;
                 print("Product ",self.n_id,"on Station",source_Station.get_name(),"was processed in ",process_time,"secs.")
+            else:
+                #print("Station: ",source_Station.get_name()," is currently blocked.");
+                pass
             sleep(1);
 
     def transport_to_next_station(self):
@@ -76,7 +81,7 @@ class Product(object):
 
 
     def is_finished(self):
-        return self.is_finished;
+        return self.__is_finished;
 
     def get_flow_index(self):
         #print("index",self.flow_index);

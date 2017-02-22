@@ -13,9 +13,9 @@ import numpy as np
 
 
 class Transport_Handler(object):
-    stations = [Station];
-    flow = [0,0];
-    product_list = [Product];
+    stations = [];
+    flow = [];
+    product_list = [];
 
     def __init__(self, n_products=10):
         self.n_products = n_products;
@@ -26,9 +26,11 @@ class Transport_Handler(object):
         t_start = clock()
 
         for i in range(0,n):
-            t = threading.Thread(target=Product, args=(self.stations,self.flow,i)).start();
-            self.product_list.append(t);
+            t = threading.Thread(target=Product, args=(self,self.stations,self.flow,i)).start();
+            #self.product_list.append(t);
+        sleep(0.1*n);
 
+        print("Product :",self.product_list)
         are_products_finished = False;
         while (are_products_finished == False):
             is_done=True;
@@ -43,6 +45,10 @@ class Transport_Handler(object):
         t_end = clock()
         t_dt = t_end - t_start
         print("Der Vorgang mit",n,"Produkten dauerte",t_dt,"sekunden.")
+
+    def register_products(self,prod=Product):
+        self.product_list.append(prod);
+        print("Product was added, size:",self.product_list.__len__());
 
     def lade_Listen(self):
         # Import Stations, flow and Products from XML
@@ -59,16 +65,18 @@ class Transport_Handler(object):
                             Station("Ausgang",[6,6]),
                             ];
             self.flow = [[0, 2],
-                    [4, 3],
-                    [3, 1],
-                    [2, 4],
-                    [1, 5]];
+                        [4, 3],
+                        [3, 1],
+                        [2, 4],
+                        [1, 5],
+                        [6, 2]
+                         ];
             print("Keine XML gefunden, lade Ersatzwerte",self.flow)
 
 ## Main
 def run():
     start_object = Transport_Handler();
-    start_object.start(10);
+    start_object.start(10); # Anzahl der zu fertigenden Produkte
 
 
 run();
