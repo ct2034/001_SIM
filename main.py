@@ -26,21 +26,23 @@ class Transport_Handler(object):
         t_start = clock()
 
         for i in range(0,n):
-            threading.Thread(self.create_Product(self.stations,self.flow,i)).start();
-            #t1.start();
-            #t1.join();
+            t = threading.Thread(target=Product, args=(self.stations,self.flow,i)).start();
+            self.product_list.append(t);
 
-            #prod = Product(self.stations,self.flow,i);
-            #self.product_list.append(prod);
-            #prod.start_lifecycle();
+        are_products_finished = False;
+        while (are_products_finished == False):
+            is_done=True;
+            for prod in self.product_list:
+                if (not prod.is_finished()):
+                    is_done = False;
+            if (is_done):
+                are_products_finished = True;
+                print("it's done, magic")
+            sleep(0.1);
 
         t_end = clock()
         t_dt = t_end - t_start
         print("Der Vorgang mit",n,"Produkten dauerte",t_dt,"sekunden.")
-
-    def create_Product(self,stations, flow, i):
-        prod = Product(self.stations, self.flow, i);
-        self.product_list.append(prod);
 
     def lade_Listen(self):
         # Import Stations, flow and Products from XML

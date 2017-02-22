@@ -52,7 +52,7 @@ class Product(object):
             if (source_Station.is_free()):
                 source_Station.process_Product(process_time);
                 is_processed=True;
-                print("Produkt on Station",source_Station.get_name(),"was processed in ",process_time,"secs.")
+                print("Product ",self.n_id,"on Station",source_Station.get_name(),"was processed in ",process_time,"secs.")
             sleep(1);
 
     def transport_to_next_station(self):
@@ -69,7 +69,7 @@ class Product(object):
         pos_delta =  ([pos_source[0]-pos_dest[0]],[pos_source[1]-pos_dest[1]])
         sek_sleep = LA.norm(pos_delta)
 
-        print("Product drives",sek_sleep,"s, from "+source_Station.get_name()+" to "+dest_Station.get_name())
+        print("Product ",self.n_id," drives",sek_sleep,"s, from "+source_Station.get_name()+" to "+dest_Station.get_name())
         sleep(sek_sleep)
         #Fzg ist am Ziel, Flusspunkt erreicht
         self.increment_flow_index();
