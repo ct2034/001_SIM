@@ -7,6 +7,7 @@ from numpy import linalg as LA
 #Eigene importe
 from Station import Station
 from Product import Product
+import threading
 
 import numpy as np
 
@@ -14,6 +15,7 @@ import numpy as np
 class Transport_Handler(object):
     stations = [Station];
     flow = [0,0];
+    product_list = [Product];
 
     def __init__(self, n_products=10):
         self.n_products = n_products;
@@ -22,15 +24,23 @@ class Transport_Handler(object):
     def start(self,n=10):
         print("Simulation startet:")
         t_start = clock()
-        product_list = [Product]
+
         for i in range(0,n):
-            prod = Product(self.stations,self.flow,i);
-            product_list.append(prod);
-            prod.start_lifecycle();
+            threading.Thread(self.create_Product(self.stations,self.flow,i)).start();
+            #t1.start();
+            #t1.join();
+
+            #prod = Product(self.stations,self.flow,i);
+            #self.product_list.append(prod);
+            #prod.start_lifecycle();
 
         t_end = clock()
         t_dt = t_end - t_start
         print("Der Vorgang mit",n,"Produkten dauerte",t_dt,"sekunden.")
+
+    def create_Product(self,stations, flow, i):
+        prod = Product(self.stations, self.flow, i);
+        self.product_list.append(prod);
 
     def lade_Listen(self):
         # Import Stations, flow and Products from XML

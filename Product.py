@@ -16,12 +16,14 @@ class Product(object):
         self.is_finished = False
         self.t_birth = clock()
         print("Product ",n_id," was created")
+        #self.__start_lifecycle();
         self.thread = threading.Thread(self.__start_lifecycle());
 
     def start_lifecycle(self):
         #runs lifecycle as Thread
         self.thread.start();
         self.thread.join();
+
 
 
     def __start_lifecycle(self):
@@ -39,7 +41,6 @@ class Product(object):
                     self.process_Product();
 
         self.t_end = clock();
-        print("Product Nr. ",self.n_id,"is finished")
 
     def process_Product(self):
         is_processed = False;
